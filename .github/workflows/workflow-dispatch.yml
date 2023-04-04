@@ -17,8 +17,8 @@ env:
   FRUIT_ABBREVIATION: ${{ github.event.inputs.fruit == 'apple' && 'ap' || github.event.inputs.fruit == 'banana' && 'bn' || 'wm' }}
   CP_FRUIT_SELECTION: ${{ github.event.client_payload.fruit }}
   CP_FRUIT_ABBREVIATION: ${{ github.event.client_payload.fruit == 'apple' && 'ap' || github.event.client_payload.fruit == 'banana' && 'bn' || 'wm' }}
-  COALESCE_FRUIT_SELECTION: ${{ coalesce(github.event.inputs.fruit, github.event.client_payload.fruit) }}
-  COALESCE_FRUIT_ABBREVIATION: 'TODO'
+  COALESCE_FRUIT_SELECTION: ${{ github.event.inputs.fruit || github.event.client_payload.fruit }}
+  COALESCE_FRUIT_ABBREVIATION: ${{ (github.event.client_payload.fruit || github.event.inputs.fruit) == 'apple' && 'ap' || (github.event.client_payload.fruit || github.event.inputs.fruit) == 'banana' && 'bn' || 'wm' }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

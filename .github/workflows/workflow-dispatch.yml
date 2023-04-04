@@ -15,6 +15,7 @@ on:
 env:
   FRUIT_SELECTION: ${{ github.event.inputs.fruit }}
   FRUIT_ABBREVIATION: ${{ github.event.inputs.fruit == 'apple' && 'ap' || github.event.inputs.fruit == 'banana' && 'bn' || 'wm' }}
+  FRUIT_ABBR2: ${{ env.FRUIT_SELECTION == 'apple' && 'ap' || env.FRUIT_SELECTION == 'banana' && 'bn' || 'wm' }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -31,3 +32,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo "You chose ${{ env.FRUIT_SELECTION }} which we abbreviated as ${{ env.FRUIT_ABBREVIATION }}"
+      
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo "Comparing usage of github.event.inputs.fruit (${{ env.FRUIT_ABBREVIATION }}) to env.FRUIT_SELECTION ${{ env.FRUIT_ABBR2 }}"

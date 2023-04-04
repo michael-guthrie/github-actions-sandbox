@@ -17,8 +17,8 @@ env:
   FRUIT_ABBREVIATION: ${{ github.event.inputs.fruit == 'apple' && 'ap' || github.event.inputs.fruit == 'banana' && 'bn' || 'wm' }}
   CP_FRUIT_SELECTION: ${{ github.event.client_payload.fruit }}
   CP_FRUIT_ABBREVIATION: ${{ github.event.client_payload.fruit == 'apple' && 'ap' || github.event.client_payload.fruit == 'banana' && 'bn' || 'wm' }}
-  COALESCE_FRUIT_SELECTION: ${{ FRUIT_SELECTION || CP_FRUIT_SELECTION }}
-  COALESCE_FRUIT_ABBREVIATION: ${{ (github.event.client_payload.fruit || github.event.inputs.fruit) == 'apple' && 'ap' || (github.event.client_payload.fruit || github.event.inputs.fruit) == 'banana' && 'bn' || 'wm' }}
+  # COALESCE_FRUIT_SELECTION: ${{ github.event.client_payload.fruit || github.event.inputs.fruit }}
+  # COALESCE_FRUIT_ABBREVIATION: ${{ (github.event.client_payload.fruit || github.event.inputs.fruit) == 'apple' && 'ap' || (github.event.client_payload.fruit || github.event.inputs.fruit) == 'banana' && 'bn' || 'wm' }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,6 +27,10 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     
+    env:
+      COALESCE_FRUIT_SELECTION: ${{ env.FRUIT_SELECTION || env.CP_FRUIT_SELECTION }}
+      COALESCE_FRUIT_ABBREVIATION: ${{ (github.event.client_payload.fruit || github.event.inputs.fruit) == 'apple' && 'ap' || (github.event.client_payload.fruit || github.event.inputs.fruit) == 'banana' && 'bn' || 'wm' }}
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

@@ -15,7 +15,10 @@ on:
 env:
   FRUIT_SELECTION: ${{ github.event.inputs.fruit }}
   FRUIT_ABBREVIATION: ${{ github.event.inputs.fruit == 'apple' && 'ap' || github.event.inputs.fruit == 'banana' && 'bn' || 'wm' }}
-  FRUIT_ABBR2: ${{ env.FRUIT_SELECTION == 'apple' && 'ap' || env.FRUIT_SELECTION == 'banana' && 'bn' || 'wm' }}
+  CP_FRUIT_SELECTION: ${{ github.event.client_payload.fruit }}
+  CP_FRUIT_ABBREVIATION: ${{ github.event.client_payload.fruit == 'apple' && 'ap' || github.event.client_payload.fruit == 'banana' && 'bn' || 'wm' }}
+  COALESCE_FRUIT_SELECTION: ${{ coalesce(github.event.inputs.fruit, github.event.client_payload.fruit) }}
+  COALESCE_FRUIT_ABBREVIATION: 'TODO'
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,4 +38,7 @@ jobs:
       
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo "Comparing usage of github.event.inputs.fruit (${{ env.FRUIT_ABBREVIATION }}) to env.FRUIT_SELECTION ${{ env.FRUIT_ABBR2 }}"
+        run: |
+          echo "github.event.inputs values (${{ env.FRUIT_SELECTION }}, ${{ env.FRUIT_ABBREVIATION }})"
+          echo "github.event.client_payload values (${{ env.CP_FRUIT_SELECTION }}, ${{ env.CP_FRUIT_ABBREVIATION }})"
+          echo "coalesced values (${{ env.COALESCE_FRUIT_SELECTION }}, ${{ env.COALESCE_FRUIT_ABBREVIATION }})"

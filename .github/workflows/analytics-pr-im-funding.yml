@@ -32,10 +32,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.IM_ORG_REPO_TOKEN }}
           LABELS: "PR Activity Report"
           ORGANIZATIONS: "im-funding,im-platform,im-practices"
-          # GITHUB_OWNERS_REPOS: "im-funding/allocation-manager,im-funding/BenefitsAccounts-Gateway-Service,im-funding/client-configuration-graphql-api,im-funding/client-configuration-team,im-funding/client-data-azure-infrastructure,im-funding/client-guides-azure-functions,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/,im-funding/"
+          # GITHUB_OWNERS_REPOS: ${{ vars.PR_ANALYTICS_REPOS }}
           GITHUB_OWNER_FOR_ISSUE: "michael-guthrie"
           GITHUB_REPO_FOR_ISSUE: "github-actions-sandbox"
-          SHOW_USERS: "AdityaRayWTW,brentAaronPatterson,BretPehrsonWTW,Dshoupe,gordke,heatherjnelson,jasonsroka1,JoaquinPretell92,JosueNinolibre,LUNA56144,ManuelFerna,mgoicochea-wtwco,michael-guthrie,RaviWTW,RuntimeRascal,SopanChaudhariWTW,Suyalur"
+          SHOW_USERS: ${{ vars.PR_ANALYTICS_SHOW_USERS }}
           CORE_HOURS_START: "2:00"
           CORE_HOURS_END: "18:00"
           TIMEZONE: "america/denver"
